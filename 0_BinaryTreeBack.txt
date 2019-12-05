@@ -1,0 +1,60 @@
+### Binary Tree
+
+create on April 24th, 2019 by Lydia
+
+No.94 Binary Tree Inorder Traversal ##medium @April 25
+
+No.95 Unique Binary Search Trees II ##medium @May 2
+
+No.96 Unique Binary Search Trees ##medium @April 30
+
+No.98 Validate Binary Search Tree ##medium @May 2
+
+No.99 Recover Binary Search Tree ##hard @May 8
+
+No.100 Same Tree ##easy @May 2
+
+No.101 Symmetric Tree ##medium @May 2
+
+No.102 Binary Tree Level Order Traversal ## medium @May 2
+
+No.103 Binary Tree Zigzag Level Order Traversal ## easy @May 2
+
+No.104 Maximum Depth of Binary Tree ##easy @May 8
+
+No.105 Construct Binary Tree from Preorder and Inorder Traversal ##medium @ May 8
+
+No.106 Construct Binary Tree from Inorder and Postorder Traversal ##medium @ May 8
+
+No.107 Binary Tree Level Order Traversal II ## medium @May 8
+
+108 109 110 111 112 113 114 
+
+No.144 Binary Tree Preorder Traversal ##easy @May 1
+
+No.145 Binary Tree Postorder Traversal ##easy @May 1
+
+124 156 199 226 236
+
+No.272 #########locked 
+No.314 #########locked 
+
+331 336 431 501 536 543 545 549 
+
+No.563 Binary Tree Tilt @April 20 ##easy
+
+617 662 654 655 671 742 814 863 919 958 
+
+965 
+
+968 979
+
+993
+
+
+
+#### 1. dfs(depth-first search)
+
+- Inorder(left -> root -> right)
+- Preorder(root -> left -> right)
+- Pastorder(left -> right -> root)

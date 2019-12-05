@@ -1,0 +1,290 @@
+### Binary Tree
+
+#### 94. Binary Tree Inorder Travesal
+
+Similar to 144(Preorder) and 145(Postorder). But remember Inorder first.
+
+```python
+def dfs(root):
+  res = []
+	if root:
+    res = self.dfs(root.left)
+    res.append(root.val)
+    res += self.dfs(root.right)
+  return res
+```
+
+
+
+#### 95. Unique Binary Search Tree II
+
+output all generated BSF tree store the value from 1 to n.
+
+Still uncertain:
+
+​	— what is the difference return, return [], return [None];
+
+​	— the for loop issue
+
+```python
+def generateTress(self, root, n):
+  if n == 0:
+    return []
+  return generateBFS(1, n)
+
+def generateBFS(self, left, right):
+  res = []
+  if left > right:
+    return [None] # what is the difference return, return [], return [None]
+  for i in range(left, right + 1):
+    leftNodes = self.generateBFS(left, i - 1)
+    rightNodes = self.generateBFS(i + 1, right)
+        
+    for leftNode in leftNodes:
+      for rightNode in rightNodes:
+        node = TreeNode(i)
+        node.left = leftNode
+        node.right = rightNode
+        res.append(node)
+  return res
+```
+
+
+
+#### 96. Unique Binary Search trees
+
+Only count the number:  the Catalan number
+
+```python
+def CountTree(n):
+  if n < 2:
+    return 1
+  c_dict = {}
+  c_dict[0] = 1
+  c_dict[1] = 1
+  for i in range(1, n):
+    c_dict[i] = 0
+    for j in range(i):
+      c_dict[i] += c_dict[j] * c_dict[i-j-1] 
+  return c_dict[n]
+```
+
+
+
+#### 98. Validate Binary Search Tree
+
+Validate: left < root < right
+
+This is not an easy one. Split it into two functions
+
+```python
+def isValidBST(self,root):
+  return valid(root, float("-inf"),float("inf"))
+
+def valid(self, root,v_min, v_max):
+  if not root:
+    return true
+  if root.val < v_min or root.val > v_max:
+    return False
+  return self.valid(root_left,v_min,root.val) and self.valid(root_right,root.val,v_max)
+  
+```
+
+
+
+#### 99. Recover Binary Search Tree
+
+The idea of pointer. Should learn to master it afterwards
+
+```python
+def recoverTree(self,root):
+  self.pre, self.first, self.second = None, None, None
+  self.recoverBST(root)
+  self.first.val, self.second.val = self.second.val, self.first.val
+
+def recoverBST(self, root):
+  if not root:
+    return
+  self.recoverBST(root.left)
+  if self.pre and self.pre.val > root.val:
+    if not self.first:
+      self.first = self.pre
+    self.second = root
+  self.pre = root
+  self.recoverBST(root.right)
+```
+
+
+
+#### 100. Same Tree
+
+ Given two binary trees. Different from the mirror bianry tree
+
+```python
+def isSameBST(self,p,q):
+  return self.TreeBFS(p) == self.TreeBFS(q)
+
+def TreeBFS(self, root):
+  res = []
+  if not root:
+    return [None]
+  res = self.TreeBFS(root.left)
+  res.append(root.val)
+  res += self.TreeBFS(root.right)
+	return res  
+```
+
+Here we get a better solution:
+
+```python
+def isSameBST(self,p,q):
+  if not p or not q: ## here is the OR
+    return p == q
+  return p.val == q.val and self.isSameBST(p.left,q.left) and self.isSameBST(p.right,q.right)
+```
+
+
+
+#### 101. Symmetric Tree
+
+ Given one binary trees, check if it is mirror tree
+
+```python
+def isSymmetric(self,root):  
+    return self.MirrorTree(root,root)
+
+    def MirrorTree(self, root1,root2):
+        if not root1 and not root2:
+            return True
+        if root1 and root2:
+            return root1.val == root2.val and self.MirrorTree(root1.left,root2.right) and self.MirrorTree(root1.right,root2.left)
+        return False  
+```
+
+Haha, Got this - Runtime: 32 ms, faster than **100.00%** of Python3 online submissions for Symmetric Tree.
+
+
+
+#### 102. Binary Tree Level Order Traversal
+
+For Bredth First Search, consider queue. For Depth First Search, usually stack
+
+```python
+def levelOrder(self,root):
+    res = []
+    if not root:
+      return res
+    queue = collections.deque([root]) # create a queue
+    while queue:
+      level = []
+
+      for i in range(len(queue)):
+        node = queue.popleft()
+        level.append(node.val)
+        if node.left:
+          queue.append(node.left)
+        if node.right:
+          queue.append(node.right)
+      res.append(level)
+    return res
+```
+
+
+
+#### 103. Binary Tree Zigzag Level Order Traversal
+
+Find the maximum value.
+
+```python
+def levelOrder(self,root):
+  	count = 0
+    res = []
+    if not root:
+      return res
+    queue = collections.deque([root]) # create a queue
+    while queue:
+      level = []
+			count += 1
+      for i in range(len(queue)):
+        node = queue.popleft()
+        level.append(node.val)
+        if node.left:
+          queue.append(node.left)
+        if node.right:
+          queue.append(node.right)
+      if count %2:
+        level = level[::-1]
+      res.append(level)
+   return res
+```
+
+
+
+#### 104. Maximum Depth of Binary Tree
+
+Find the maximum value.
+
+```python
+def FindDepth(root):
+  max_depth = 0
+	if root:
+    left_max = self.FindDepth(root.left)
+    right_max = self.FindDepth(root.right)
+    max_depth = max(left_max, right_max) + 1
+  return max_depth
+```
+
+
+
+#### 144. Binary Tree Preorder Travesal
+
+Similar to 94(Inorder) and 145(Postorder). But remember Inorder first.
+
+```python
+def dfs(root):
+  res = []
+	if root:
+    res.append(root.val)
+    res += self.dfs(root.left)
+    res += self.dfs(root.right)
+  return res
+```
+
+
+
+#### 145. Binary Tree Postorder Travesal
+
+Similar to 144(Preorder) and 94(Inorder). But remember Inorder first.
+
+```python
+def dfs(root):
+  res = []
+	if root:
+    res = self.dfs(root.left)
+    res += self.dfs(root.right)
+    res.append(root.val)
+  return res
+```
+
+
+
+#### 563. Binary Tree Tilt
+
+The main point is: the tilt of the **whole tree** is defined as the **sum** of all nodes' tilt.
+
+Keep this in mind and we get the following codes:
+
+```python
+def dfs(root):
+	if not root:
+    return 0, 0
+  leftSum, leftTilt = self.Tree(root.left)
+  rightSum, rightTilt = self.Tree(root.right)
+
+  return leftSum + root.val + rightSum, abs(leftSum - rightSum) + leftTilt + rightTilt
+
+return dfs(root)[-1]
+```
+
+
+
